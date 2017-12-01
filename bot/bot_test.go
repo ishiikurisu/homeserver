@@ -3,6 +3,7 @@ package bot
 import (
     "testing"
     "fmt"
+    "github.com/ishiikurisu/house"
 )
 
 func TestCanCreateAnEmptyBot(t *testing.T) {
@@ -53,4 +54,15 @@ func TestBotOnlyAnswersIfIdIsInAllowedList(t *testing.T) {
     if answer == "What are you doing here?" {
         t.Error("Why isn't it treating the costumer correctly?")
     }
+}
+
+func TestDiscoverIpAddress(t *testing.T) {
+  if house.GetOS() == "win32" {
+    return
+  }
+
+  ip := DiscoverIpAddress()
+  if ip != "192.168.0.110" {
+    t.Error("Incorrect IP address detected")
+  }
 }

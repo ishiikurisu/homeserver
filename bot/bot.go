@@ -5,6 +5,9 @@ import (
     "io/ioutil"
     "strconv"
     "fmt"
+    "github.com/ishiikurisu/house"
+    "os/exec"
+    "strings"
 )
 
 type Bot struct {
@@ -69,7 +72,7 @@ func LoadAllowed(where string) ([]int, error) {
     return outlet, nil
 }
 
-// Generates the answer for the user based on its id. Should send baclk the IP
+// Generates the answer for the user based on its id. Should send back the IP
 // address of the current machine.
 func (bot *Bot) Answer(targetId int) string {
     allowed := false
@@ -87,4 +90,29 @@ func (bot *Bot) Answer(targetId int) string {
     }
 
     return outlet
+}
+
+// Discovers the IP address of the current machine.
+func DiscoverIpAddress() string {
+  ip := ""
+
+  if house.GetOS() == "win32" {
+    return ip
+  }
+
+  cmd := exec.Command("ip", "addr", "show")
+  rawOutput, oops := cmd.Output()
+  if oops == nil {
+    output := string(rawOutput)
+    lines := strings.Split(output, "\n")
+    for _, line := range lines {
+      fields := strings.Split(strings.Trim(line, " "), " ")
+      if (fields[0] == "inet") && (strings.Contains(fields[1], "192")) {
+        ip = strings.Split(fields[1], "/")[0]
+      }
+    }
+  }
+
+
+  return ip
 }
