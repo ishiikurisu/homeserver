@@ -25,6 +25,7 @@ func Empty() *Bot {
 // Creates a new bot. It requires the bot's Telegram token and the path to the
 // allowed ids list. If the path is empty, it will try to load from
 // `./data/homeserver/allowed.yml`.
+// IDEA: Maybe it should receive the allowed ids instead of a filepath.
 func New(token, allowedPath string) (*Bot, error) {
     bot := Empty()
     allowed := make([]int, 0)
@@ -66,4 +67,24 @@ func LoadAllowed(where string) ([]int, error) {
     }
 
     return outlet, nil
+}
+
+// Generates the answer for the user based on its id. Should send baclk the IP
+// address of the current machine.
+func (bot *Bot) Answer(targetId int) string {
+    allowed := false
+    outlet := "What are you doing here?"
+
+    for _, id := range bot.Allowed {
+        if id == targetId {
+            allowed = true
+        }
+    }
+
+    if allowed {
+        // TODO Discover the IP address of the machine.
+        outlet = "TODO Implement me"
+    }
+
+    return outlet
 }

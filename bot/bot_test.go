@@ -26,8 +26,31 @@ func TestLoadingConfigurationFile(t *testing.T) {
     allowed, oops := LoadAllowed("./data/homeserver/allowed.yml")
     if len(allowed) != 1 {
         t.Error("Couldn't load the allowed ids' file")
+        return
     } else if oops != nil {
         t.Error(fmt.Sprintf("Some other error happenned while trying to load the allowed ids file: %s\n", oops))
+        return
     }
-    // IDEA Check for corruption in data
+
+    if allowed[0] != 190141641 {
+        t.Error("Data corruption!")
+        return
+    }
+}
+
+func TestBotOnlyAnswersIfIdIsInAllowedList(t *testing.T) {
+    bot, oops := New("0", "")
+    if oops != nil {
+        t.Error("Shouldn't procede!")
+        return
+    }
+
+    answer := bot.Answer(0)
+    if answer != "What are you doing here?" {
+        t.Error("Why is it allowing answers to unknown folk?")
+    }
+    answer = bot.Answer(190141641)
+    if answer == "What are you doing here?" {
+        t.Error("Why isn't it treating the costumer correctly?")
+    }
 }
