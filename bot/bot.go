@@ -116,3 +116,24 @@ func DiscoverIpAddress() string {
 
   return ip
 }
+
+// Gets the token of the Telegram bot.
+func GetToken() string, error {
+    outlet := ""
+    raw, oops := ioutil.ReadFile("./data/homeserver/token.yml")
+    if oops != nil {
+        return outlet, oops
+    }
+
+    var f interface{}
+    oops = yaml.Unmarshal(raw, &f)
+    if oops != nil {
+        return outlet, oops
+    }
+
+    everything := f.(map[interface{}]interface{})
+    midlet := everything["token"].(interface{})
+    outlet = fmt.Sprintf("%v", midlet)
+
+    return outlet, nil
+}
