@@ -85,8 +85,11 @@ func (bot *Bot) Answer(targetId int64) string {
     }
 
     if allowed {
-        // TODO Discover the IP address of the machine.
-        outlet = "TODO Implement me"
+        ip := DiscoverIpAddress()
+        outlet = "I am running on Windows! $$ No IP for you unless you pay. $$"
+        if len(ip) > 0 {
+            outlet = fmt.Sprintf("The IP address is %s\nHave fun!\n", ip)
+        }
     }
 
     return outlet
