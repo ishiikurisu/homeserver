@@ -12,7 +12,7 @@ import (
 
 type Bot struct {
     Token string
-    Allowed []int
+    Allowed []int64
 
 }
 
@@ -20,7 +20,7 @@ type Bot struct {
 func Empty() *Bot {
     bot := Bot {
         Token: "",
-        Allowed: make([]int, 0),
+        Allowed: make([]int64, 0),
     }
     return &bot
 }
@@ -31,7 +31,7 @@ func Empty() *Bot {
 // IDEA: Maybe it should receive the allowed ids instead of a filepath.
 func New(token, allowedPath string) (*Bot, error) {
     bot := Empty()
-    allowed := make([]int, 0)
+    allowed := make([]int64, 0)
     path := allowedPath
 
     if len(path) == 0 {
@@ -46,8 +46,8 @@ func New(token, allowedPath string) (*Bot, error) {
 
 // This file must be a YAML file with a `allowed` list where each item must be
 // an allowed id to use the bot.
-func LoadAllowed(where string) ([]int, error) {
-    outlet := make([]int, 0)
+func LoadAllowed(where string) ([]int64, error) {
+    outlet := make([]int64, 0)
     raw, oops := ioutil.ReadFile(where)
     if oops != nil {
         return outlet, oops
@@ -62,9 +62,9 @@ func LoadAllowed(where string) ([]int, error) {
     everything := f.(map[interface{}]interface{})
     midlet := everything["allowed"].([]interface{})
     for _, it := range midlet {
-        v, oops := strconv.Atoi(fmt.Sprintf("%v", it))
+        v, oops := strconv.ParseInt(fmt.Sprintf("%v", it), 10, 64)
         if oops != nil {
-            return make([]int, 0), oops
+            return make([]int64, 0), oops
         }
         outlet = append(outlet, v)
     }
@@ -74,7 +74,7 @@ func LoadAllowed(where string) ([]int, error) {
 
 // Generates the answer for the user based on its id. Should send back the IP
 // address of the current machine.
-func (bot *Bot) Answer(targetId int) string {
+func (bot *Bot) Answer(targetId int64) string {
     allowed := false
     outlet := "What are you doing here?"
 
@@ -118,7 +118,7 @@ func DiscoverIpAddress() string {
 }
 
 // Gets the token of the Telegram bot.
-func GetToken() string, error {
+func GetToken() (string, error) {
     outlet := ""
     raw, oops := ioutil.ReadFile("./data/homeserver/token.yml")
     if oops != nil {

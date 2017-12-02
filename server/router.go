@@ -9,7 +9,7 @@ type ActionRouter struct {
 
 func NewRouter() *ActionRouter {
   router := ActionRouter {
-    Actions: make(map[string]func()string)
+    Actions: make(map[string]func()string),
   }
   return &router
 }
