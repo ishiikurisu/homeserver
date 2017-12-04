@@ -9,24 +9,23 @@ import (
 
 func main() {
   go runBot()
-  go runSite()
-  for true {
-
-  }
+  runSite()
 }
 
 func runBot() {
     token, oops := brain.GetToken()
     if oops != nil {
+        fmt.Printf("%s\n", oops)
         return
     }
     b, oops := brain.New(token, "")
     if oops != nil {
+        fmt.Printf("%s\n", oops)
         return
     }
     bot, oops := telegram.NewBotAPI(b.Token)
     if oops != nil {
-    fmt.Printf("%s\n", oops)
+        fmt.Printf("%s\n", oops)
         return
     }
 
@@ -38,6 +37,7 @@ func runBot() {
             continue
         }
         id := update.Message.Chat.ID
+        fmt.Printf("%d tried to talk!\n", id)
         msg := telegram.NewMessage(id, b.Answer(id))
         msg.ReplyToMessageID = update.Message.MessageID
         bot.Send(msg)
