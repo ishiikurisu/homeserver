@@ -1,6 +1,10 @@
 package server
 
-import "io/ioutil"
+import (
+  "io/ioutil"
+  templ "html/template"
+  "bytes"
+)
 
 type View struct {
   Pwd string
@@ -23,6 +27,26 @@ func LoadFile(path string) (string, error) {
 }
 
 func (view *View) LoadIndex() string {
-  html, _ := LoadFile(view.Pwd + "assets/index.html")
-  return html
+  buffer := bytes.NewBufferString("")
+  rawHtml, _ := LoadFile(view.Pwd + "assets/index.html")
+  rawCss, _ := LoadFile(view.Pwd + "assets/css/master.css")
+  rawJS, _ := LoadFile(view.Pwd + "assets/js/app.js")
+
+  custom := struct {
+    Style templ.CSS
+    Script templ.JS
+  }{
+    Style: templ.CSS(rawCss),
+    Script: templ.JS(rawJS),
+  }
+
+  template, oops := templ.New("index").Parse(rawHtml)
+  if oops != nil {
+    panic(oops)
+  }
+  template.Execute(buffer, custom)
+  outlet := buffer.String()
+
+  return outlet
 }
+
