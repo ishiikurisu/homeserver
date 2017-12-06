@@ -1,18 +1,60 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
     <style>
       {{.Style}}
     </style>
     <title>Home Server</title>
   </head>
   <body>
-    <h1>
-      Hello!
-    </h1>
-    <p>
-      Let's make a home server?
-    </p>
+    <!-- Navigation -->
+    <div class="navigation">
+      <div class="pure-g splash">
+        <h1>
+          Home Server
+        </h1>
+      </div>
+    </div>
+    <!-- Main Content -->
+    <div class="content">
+      <div class="pure-g channel">
+        <div class="pure-u-1-3 ytdl">
+          <p>
+            <a href="/ytdl">YouTube Downloader</a>
+          </p>
+        </div>
+        <div class="pure-u-1-3 unused">
+          <p>
+            Some channel here
+          </p>
+        </div>
+        <div class="pure-u-1-3 unused">
+          <p>
+            Some channel here
+          </p>
+        </div>
+      </div>
+
+      <div class="pure-g channel">
+        <div class="pure-u-1-3 unused">
+          <p>
+            Some channel here
+          </p>
+        </div>
+        <div class="pure-u-1-3 unused">
+          <p>
+            Some channel here
+          </p>
+        </div>
+        <div class="pure-u-1-3 unused">
+          <p>
+            Some channel here
+          </p>
+        </div>
+      </div>
+    </div>
+
     <script>
       {{.Script}}
     </script>

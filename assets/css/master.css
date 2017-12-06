@@ -1,5 +1,39 @@
+/* OVERALL STUFF */
 body {
-  background: yellow;
-  color: white;
-  font-family: 'cursive';
+  background: #edf7d2;
+  color: #5b5b5b;
+  font-family: 'sans';
 }
+
+/* SPLASH */
+.splash {
+  height: 30%;
+  background: #7d7c7a;
+  color: #edf7b5;
+  align-items: center;
+  display: flex;
+}
+
+
+/* CHANNELS */
+.channel {
+  text-align: center;
+}
+
+.unused {
+  background: grey;
+}
+
+.ytdl {
+  background: white;
+  color: red;
+}
+  .ytdl a {
+    color: red;
+  }
+  .ytdl a:hover {
+    color: red;
+  }
+  .ytdl a:clicked {
+    color: red;
+  }
