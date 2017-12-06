@@ -62,7 +62,7 @@ func TestDiscoverIpAddress(t *testing.T) {
   }
 
   ip := DiscoverIpAddress()
-  if ip != "192.168.0.110" {
-    t.Error("Incorrect IP address detected")
+  if ip != "192.168.0.111" {
+    t.Error(fmt.Sprintf("Incorrect IP address detected: %s\n", ip))
   }
 }
