@@ -51,3 +51,6 @@ func (view *View) LoadIndex() string {
   return view.LoadPage("assets/index.html")
 }
 
+func (view *View) LoadYtdl() string {
+  return view.LoadPage("assets/ytdl.html")
+}

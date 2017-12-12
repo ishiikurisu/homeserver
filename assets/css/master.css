@@ -37,3 +37,8 @@ body {
   .ytdl a:clicked {
     color: red;
   }
+
+/* YOUTUBE DOWNLOADER */
+.pure-form {
+  align-items: center;
+}

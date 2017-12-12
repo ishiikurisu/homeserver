@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <style>
+      {{.Style}}
+    </style>
+    <title>Home Server</title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <div class="navigation">
+      <div class="pure-g splash">
+        <h1>
+          Home Server
+        </h1>
+      </div>
+    </div>
+    <!-- Main Content -->
+    <div class="content">
+      <div class="pure-g">
+        <div class="pure-u-1-2">
+          <form class="pure-form pure-form-stacked">
+            <fieldset>
+                <legend>YouTube Downloader</legend>
+                <textarea class="pure-input" id="links" placeholder="Adicione seus links aqui!
+                                                                Cada um em uma linha."></textarea>
+                <button type="submit" onclick="ytdl_main();" class="pure-button pure-button-primary">Baixar</button>
+            </fieldset>
+          </form>
+        </div>
+        <div class="pure-u-1-2 results" id="results">
+          <h1>
+            Seus resultados apareceram aqui.
+          </h1>
+        </div>
+      </div>
+
+      <div class="pure-g">
+        <div class="pure-u">
+          <p>
+            Você prefere o @fsckcopyrightbot no Telegram?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      {{.Script}}
+    </script>
+  </body>
+</html>

@@ -14,6 +14,7 @@ func NewServer(port string) *Server {
   }
 
   server.Router.Route("/", server.Index)
+  server.Router.Route("/ytdl", server.Ytdl)
 
   return &server
 }
@@ -24,4 +25,8 @@ func (server *Server) Run() {
 
 func (server *Server) Index() string {
   return server.View.LoadIndex()
+}
+
+func (server *Server) Ytdl() string {
+  return server.View.LoadYtdl()
 }
