@@ -2,7 +2,4 @@
 build:
     local: false
     commands:
-        - go test github.com/ishiikurisu/homeserver/bot
-        - go test github.com/ishiikurisu/homeserver/server
-        - go build github.com/ishiikurisu/homeserver/main
-        - mv main home
+        - go test github.com/ishiikurisu/homeserver/kaizen
